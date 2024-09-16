@@ -1,4 +1,3 @@
-package com.particleengine;
 /* 
 Main.java
 Author: Anika Krieger
@@ -7,13 +6,15 @@ Date: September 10
 Description: Particle Engine Project CRCPIII - Create particle engine with basic physics and some interactivity
 */
 
-import processing.core.*;
+package com.particleengine;
 
-public class Main extends PApplet {
+import processing.core.PApplet;
 
-    Ball ball; //a ball that we will draw to the screen
-    
-    
+public class Main extends PApplet 
+{
+
+    Balls balls; // handles balls in simulation
+
     public static void main(String[] args) 
     {
         PApplet.main("com.particleengine.Main");
@@ -21,30 +22,28 @@ public class Main extends PApplet {
 
     public void settings()
     {
-        // Change screen size from default
-        size(500,500);
+        size(800, 600); // size of window
     }
-
-    
 
     public void setup()
     {
-        ball = new Ball(width/2.0f, height*.10f, 50.f, this, color(173, 241, 255)); //make everything a float by adding an f at the end
-        
+        balls = new Balls(this); // create instance of Balls class
+        balls.setup(); // call setup to initialize balls
     }
-
 
     public void draw()
     {
-        background(255, 176, 239);
+        background(255); // clear background each frame
+        balls.draw(); // draw the balls
+    }
 
-        noStroke();
-        ball.draw();
+    public void keyPressed()
+    {
+        balls.keyPressed(); // call keyPressed in Balls class when a key is pressed
     }
 
     public void mousePressed()
     {
-         ball.faster();
+        balls.mousePressed(); // call mousePressed in Balls class when mouse is pressed
     }
-}   
-
+}
